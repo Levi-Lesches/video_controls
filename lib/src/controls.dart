@@ -105,7 +105,7 @@ class VideoControlsState extends State<VideoControls> {
   Widget build(BuildContext context) => IconTheme(
     data: const IconThemeData(color: Colors.white),
     child: Container(
-      color: Colors.black,
+      color: const Color.fromRGBO(0, 0, 0, 0.5),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
