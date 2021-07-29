@@ -61,13 +61,19 @@ class VideoPlayerState extends State<VideoPlayer> {
 						child: VideoControls(
 							controller,
 							openFullScreen: openFullScreen,
-							closeFullScreen: () => Navigator.of(context).pop(controller.value),
+							closeFullScreen: closeFullScreen,
 						)
 					) 
 				)
 			]
 		)
 	);
+
+	/// Closes the full screen player
+	Future<bool> closeFullScreen() async {
+		Navigator.of(context).pop(controller.value); 
+		return false;
+	}
 
 	/// Opens the video in full screen.
 	/// 
@@ -78,7 +84,10 @@ class VideoPlayerState extends State<VideoPlayer> {
 		controller.isFullScreen = true;
 		final plugin.VideoPlayerValue video = await showDialog(
 			context: context,
-			builder: (_) => Scaffold(body: VideoPlayer(controller))
+			builder: (_) => WillPopScope(
+				onWillPop: closeFullScreen,
+				child: Scaffold(body: VideoPlayer(controller))
+			)
 		);
 		controller.isFullScreen = false;
 		// BUG: We shouldn't have to re-initialize every time!
