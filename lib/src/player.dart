@@ -31,6 +31,8 @@ class VideoPlayerState extends State<VideoPlayer> {
 	/// Whether this video is ready to be played. 
 	bool get isReady => controller.value.isInitialized;
 
+	bool isHovering = false;
+
 	@override
 	void initState() {
 		super.initState();
@@ -47,25 +49,37 @@ class VideoPlayerState extends State<VideoPlayer> {
 	@override
 	Widget build(BuildContext context) => AspectRatio(
 		aspectRatio: controller.value.aspectRatio,
-		child: Stack(
-			children: [
-				// Video background
-				if (isReady) plugin.VideoPlayer(controller)
-				else Container(color: Colors.grey.shade200.withOpacity(0.1)),
+		child: InkWell(
+			onHover: (bool value) => setState(() => isHovering = value),
+			// onExit: (_) => setState(() => isHovering = false),
+			onTap: () async {
+				setState(() => isHovering = true);
+				await Future.delayed(const Duration(seconds: 1));
+				setState(() => isHovering = false);
+			},
+			child: Stack(
+				children: [
+					// Video background
+					if (isReady) plugin.VideoPlayer(controller)
+					else Container(color: Colors.grey.shade200.withOpacity(0.1)),
 
-				// Controls foreground
-				Align(
-					alignment: Alignment.bottomCenter,
-					child: !isReady ? const LinearProgressIndicator() : SizedBox(
-						height: 100,
-						child: VideoControls(
-							controller,
-							openFullScreen: openFullScreen,
-							closeFullScreen: closeFullScreen,
-						)
-					) 
-				)
-			]
+					// Controls foreground
+					AnimatedSwitcher(
+						duration: const Duration(milliseconds: 500),
+						child: controller.value.isPlaying && !isHovering ? Container() : Align(
+						alignment: Alignment.bottomCenter,
+						child: !isReady ? const LinearProgressIndicator() : SizedBox(
+							height: 100,
+							child: VideoControls(
+								controller,
+								openFullScreen: openFullScreen,
+								closeFullScreen: closeFullScreen,
+							)
+						) 
+					)
+					)
+				]
+			)
 		)
 	);
 
