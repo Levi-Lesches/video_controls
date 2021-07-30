@@ -4,6 +4,7 @@
 - Controls appear when tapping on the screen (for mobile)
 - Controls fade out when the cursor doesn't move
 - Added README
+- Improved example
 
 ### Fixed
 - Controls overlay is transparent

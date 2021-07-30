@@ -33,8 +33,14 @@ class VideoPlayerState extends State<VideoPlayer> {
 	/// Whether this video is ready to be played. 
 	bool get isReady => controller.value.isInitialized;
 
+	/// Whether the mouse is hovering over the video.
 	bool isHovering = false;
 
+	/// Fades the controls out when this timer is run. 
+	/// 
+	/// This is used to add a delay before fading out. Animations wouldn't work
+	/// because the animation would start too soon. With a timer, we can cancel
+	/// it and restart it whenever we want. 
 	Timer? disableControls;
 
 	@override
