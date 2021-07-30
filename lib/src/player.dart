@@ -43,6 +43,12 @@ class VideoPlayerState extends State<VideoPlayer> {
 		init();
 	}
 
+	@override
+	void dispose() {
+		disableControls?.cancel();
+		super.dispose();
+	}
+
 	/// Initializes the video, if it isn't already, and rebuilds. 
 	Future<void> init() async {
 		if (isReady) return;
@@ -54,11 +60,12 @@ class VideoPlayerState extends State<VideoPlayer> {
 	Widget build(BuildContext context) => AspectRatio(
 		aspectRatio: controller.value.aspectRatio,
 		child: Listener(
-			onPointerDown: (_) async {
-				setState(() => isHovering = true);
-				await Future.delayed(const Duration(seconds: 1));
-				setState(() => isHovering = false);
-			},
+			behavior: HitTestBehavior.translucent,
+			onPointerDown: (_) => disableControls?.cancel(),
+			onPointerUp: (_) => disableControls = Timer(
+				const Duration(seconds: 3), 
+				() => setState(() => isHovering = false)
+			),
 			onPointerHover: (_) {
 				setState(() => isHovering = true);
 				disableControls?.cancel();
