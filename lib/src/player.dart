@@ -1,3 +1,5 @@
+import "dart:async";
+
 import "package:flutter/material.dart";
 import "package:video_player/video_player.dart" as plugin;
 
@@ -33,6 +35,8 @@ class VideoPlayerState extends State<VideoPlayer> {
 
 	bool isHovering = false;
 
+	Timer? disableControls;
+
 	@override
 	void initState() {
 		super.initState();
@@ -49,13 +53,19 @@ class VideoPlayerState extends State<VideoPlayer> {
 	@override
 	Widget build(BuildContext context) => AspectRatio(
 		aspectRatio: controller.value.aspectRatio,
-		child: InkWell(
-			onHover: (bool value) => setState(() => isHovering = value),
-			// onExit: (_) => setState(() => isHovering = false),
-			onTap: () async {
+		child: Listener(
+			onPointerDown: (_) async {
 				setState(() => isHovering = true);
 				await Future.delayed(const Duration(seconds: 1));
 				setState(() => isHovering = false);
+			},
+			onPointerHover: (_) {
+				setState(() => isHovering = true);
+				disableControls?.cancel();
+				disableControls = Timer(
+					const Duration(seconds: 2), 
+					() => setState(() => isHovering = false)
+				);
 			},
 			child: Stack(
 				children: [
