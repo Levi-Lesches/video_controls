@@ -16,7 +16,10 @@ Customization options are being implemented, but the package is in a working sta
 
 ### Screenshots
 
-![](https://github.com/Levi-Lesches/video_controls/blob/main/doc/demo4.gif)
+| ![](https://github.com/Levi-Lesches/video_controls/blob/main/doc/demo4.gif) | ![](https://github.com/Levi-Lesches/video_controls/blob/main/doc/demo1.gif) |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+
+
 
 ### Customization options 
 
