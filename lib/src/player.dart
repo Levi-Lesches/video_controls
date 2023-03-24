@@ -110,7 +110,7 @@ class VideoPlayerState extends State<VideoPlayer> {
 			context: context,
 			builder: (_) => WillPopScope(
 				onWillPop: closeFullScreen,
-				child: Scaffold(body: VideoPlayer(controller))
+				child: Scaffold(body: Center(child: VideoPlayer(controller)))
 			)
 		);
 		controller.isFullScreen = false;
