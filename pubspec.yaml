@@ -1,6 +1,6 @@
 name: video_controls
 description: A wrapper around video_player to show customizable controls for Flutter videos.
-version: 0.1.0
+version: 1.0.0
 homepage: https://pub.dev/packages/video_controls
 repository: https://github.com/Levi-Lesches/video_controls
 
