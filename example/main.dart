@@ -24,7 +24,7 @@ class HomePageState extends State<HomePage> {
             Text(
               "My Video",
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline3
+              style: Theme.of(context).textTheme.displaySmall
             ),
             const SizedBox(height: 30),
             VideoPlayer(controller),

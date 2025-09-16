@@ -1,3 +1,7 @@
+## 1.0.0 - 2023-03-23
+### Fixed
+- Centered video on full-screen
+
 ## 0.1.0 - 2021-07-30
 ### Added
 - Controls overlay fades out when not focusing on the video

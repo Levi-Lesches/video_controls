@@ -142,7 +142,7 @@ class VideoControlsState extends State<VideoControls> {
               ),
               Text(
                 timestamp,
-                style: Theme.of(context).textTheme.caption
+                style: Theme.of(context).textTheme.bodySmall
                   ?.copyWith(color: Colors.white),
               ),
               const Spacer(),
